@@ -20,8 +20,7 @@ const style = {
 const AddUpdateTodo = ({todo, setTodo,icon,addOrUpdate, index}) => {
 
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {setOpen(true)
-  console.log(`add todo ${todo[index].completed}`)};
+  const handleOpen = () => {setOpen(true)}
   const handleClose = () => setOpen(false);
   
   return (

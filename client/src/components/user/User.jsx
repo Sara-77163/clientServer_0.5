@@ -30,6 +30,7 @@ const User = () => {
         catch (err) {
             alert(err.response.data)
         }
+        
         user.sort((elem1,elem2)=>elem1._id>elem2._id)
     }
     useEffect(() => {
@@ -49,6 +50,8 @@ const User = () => {
     }
     return (
         <>
+         <Stack direction="row" spacing={2}>
+         <AddUpdateUser user={user} setUser={setUser} icon={<PersonAddAltIcon />} addOrUpdate={"add"} index={0} />
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', height: '100%' }}>
                 {user.map((elem, index) => {
                     return (
@@ -81,7 +84,7 @@ const User = () => {
                 })
                 }
             </List>
-            <AddUpdateUser user={user} setUser={setUser} icon={<PersonAddAltIcon />} addOrUpdate={"add"} index={0} />
+            </Stack>
         </>
 
     )

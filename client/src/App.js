@@ -14,10 +14,10 @@ function App() {
      <Router>
       <Routes>
         <Route path="/" element={<Layot/>}> 
-        <Route index element={<Todo/>}/>
+        <Route index element={<User/>}/>
         <Route path="todo" element={<Todo/>}/>
         <Route path="posts" element={<Post/>}/>
-        <Route path="album" element={<Todo/>}/>
+        <Route path="album" element={<User/>}/>
         <Route path="users" element={<User/>}/>
         </Route>
 

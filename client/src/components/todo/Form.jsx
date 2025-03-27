@@ -5,8 +5,6 @@ import Stack from '@mui/material/Stack';
 import * as React from 'react';
 import SendIcon from '@mui/icons-material/Send'
 import Button from '@mui/material/Button';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
 const Form = ({todo, setTodo,handleClose,addOrUpdate,index})  => {
     const {
         register,
@@ -29,7 +27,7 @@ const Form = ({todo, setTodo,handleClose,addOrUpdate,index})  => {
  
     
 
-    },[titleDefault,tag,complete])
+    },[])
     const createNew = async (data) => {
         try {
             const res = await axios.post('http://localhost:1100/api/todo', data)
@@ -72,7 +70,7 @@ const Form = ({todo, setTodo,handleClose,addOrUpdate,index})  => {
          <form onSubmit={handleSubmit(onSubmit)}>
             
             <Stack spacing={2}>
-                <TextField required id="title" label="title" variant="standard" defaultValue={titleDefault} onChange={e => setTitleDefault(e.target.value)}  {...register("title") } />
+                <TextField required id="title" label="title" variant="standard" defaultValue={titleDefault}   {...register("title") } />
                 <TextField id="tag-" label="tag-(home/study/else)" variant="standard" defaultValue={tag}  {...register("tag")} />
                 <TextField id="complete"  label="completed" variant="standard" defaultValue={complete}  {...register("completed")} />
                 <Button  type="submit" variant="contained" endIcon={<SendIcon />}> Send  </Button>

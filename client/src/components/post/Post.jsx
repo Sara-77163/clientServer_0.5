@@ -48,6 +48,9 @@ const Post = () => {
     }
     return (
         <>
+           <Stack direction="row" spacing={2}>
+           <AddUpdatePost post={post} setPost={setPost} icon={<AddIcon />} addOrUpdate={"add"} index={0} />
+
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', height: '100%' }}>
                 {post.map((elem, index) => {
                     return (
@@ -80,7 +83,7 @@ const Post = () => {
                 })
                 }
             </List>
-            <AddUpdatePost post={post} setPost={setPost} icon={<AddIcon />} addOrUpdate={"add"} index={0} />
+            </Stack>
         </>
 
     )

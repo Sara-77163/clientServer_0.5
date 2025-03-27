@@ -79,6 +79,9 @@ const UserForm = ({user, setUser,handleClose,addOrUpdate,index})  => {
                 <TextField required id="userName" label="useName" variant="standard" defaultValue={userName}  {...register("userName")} />
                 <TextField id="email" label="email" variant="standard" defaultValue={email}  {...register("email")} />
                 <TextField id="phone" label="phone" variant="standard" defaultValue={phone}  {...register("phone")} />
+                <TextField id="city" label="city" variant="standard" defaultValue={""}  {...register("city")} />
+                <TextField id="street" label="steet" variant="standard" defaultValue={""}  {...register("street")} />
+                <TextField id="building" label="building" variant="standard" defaultValue={""}  {...register("building")} />
                 <Button  type="submit" variant="contained" endIcon={<SendIcon />}> Send  </Button>
             </Stack>
 
