@@ -22,10 +22,10 @@ const AddPost=async (req,res)=>{
 const UpdetaPost=async (req,res)=>{
     const {_id,title,body}=req.body
     if(!title)
-        return res.status(404).send("the title is required")
+        return res.status(400).send("the title is required")
     let post=await PhtoSchema.findById(_id)
     if(!post)
-        return res.status(400).send("the post not found")
+        return res.status(404).send("the post not found")
     post.title=title
     post.body=body
     const updataPost=await post.save()

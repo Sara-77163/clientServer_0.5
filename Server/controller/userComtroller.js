@@ -1,4 +1,3 @@
-const { default: mongoose } = require("mongoose")
 const UserSchema = require("../models/userModdel")
 
 const getAllUsers = async (req, res) => {
@@ -10,6 +9,8 @@ const getAllUsers = async (req, res) => {
 const getUserByID = async (req, res) => {
     const  { _id } = req.params
     const user = await UserSchema.findById((_id)).lean()
+    if(!user)
+        return res.status(404).send("the user not found")
     res.json(user)
 
 }
