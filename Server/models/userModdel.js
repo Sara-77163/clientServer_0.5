@@ -20,9 +20,9 @@ const UserSchema=mongoose.Schema(
             
         },
         address:{
-        city:{type:String, trim: true},
-        street:{type:String, trim: true},
-        building:{type:Number}
+        city:{type:String, trim: true,default:"none"},
+        street:{type:String, trim: true,default:"none"},
+        building:{type:Number,default:"0"}
         },
         phone:{
             type:String,

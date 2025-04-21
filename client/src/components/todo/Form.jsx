@@ -10,18 +10,19 @@ const Form = ({todo, setTodo,handleClose,addOrUpdate,index})  => {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm()
-   
-    const[titleDefault,setTitleDefault]=React.useState("")
-    const [tag,setTag]=React.useState("else")
-    const [complete,setComplete]=React.useState(false)
+        setValue
+    } = useForm({defaultValues:{
+        title:"",
+        tag:"else",
+        completed:"false"
+    }})
     const[error,setError]=React.useState("")
    
     React.useEffect(()=>{
         if(addOrUpdate==="update"){
-         setTitleDefault(todo[index].title)
-         setTag(todo[index].tag)
-         setComplete(todo[index].completed)
+         setValue("title",todo[index].title)
+         setValue("tag",todo[index].tag)
+         setValue("completed",todo[index].completed)
        
     }
  
@@ -70,9 +71,9 @@ const Form = ({todo, setTodo,handleClose,addOrUpdate,index})  => {
          <form onSubmit={handleSubmit(onSubmit)}>
             
             <Stack spacing={2}>
-                <TextField required id="title" label="title" variant="standard" defaultValue={titleDefault}   {...register("title") } />
-                <TextField id="tag-" label="tag-(home/study/else)" variant="standard" defaultValue={tag}  {...register("tag")} />
-                <TextField id="complete"  label="completed" variant="standard" defaultValue={complete}  {...register("completed")} />
+                <TextField required id="title" label="title" variant="standard"   {...register("title" ,{required:true}) } />
+                <TextField id="tag-" label="tag-(home/study/else)" variant="standard"   {...register("tag")} />
+                <TextField id="complete"  label="completed" variant="standard"   {...register("completed")} />
                 <Button  type="submit" variant="contained" endIcon={<SendIcon />}> Send  </Button>
             </Stack>
         </form>

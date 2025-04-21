@@ -51,14 +51,14 @@ const updateTodo = async (req, res) => {
 }
 const deleteTodo=async(req,res)=>{
     const {_id}=req.params
-    const todo=TodoSchema.findById(_id)
+    const todo=await TodoSchema.findById(_id)
     if(!todo)
-        res.status(404).send("the todo not found")
+        return res.status(404).send("the todo not found")
     const deleteTodo=await todo.deleteOne();
     res.json(deleteTodo)
 }
 const completeTodo=async(req,res)=>{
-    const _id=req.params
+    const {_id}=req.params
     const todo=await TodoSchema.findById(_id)
     if(!todo)
         return res.status(404).send("id not found")

@@ -8,25 +8,35 @@ import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 const UserForm = ({user, setUser,handleClose,addOrUpdate,index})  => {
-    const[name,setName]=React.useState("")
-    const [userName,setUserName]=React.useState("")
-    const [email,setEmail]=React.useState("")
-    const [phone,setPhone]=React.useState("")
-    const[error,setError]=React.useState("")
-    React.useEffect(()=>{
-        if(addOrUpdate==="update"){
-            setName(user[index].name)
-            setUserName(user[index].userName)
-            setEmail(user[index].email)
-            setPhone(user[index].email)
-        }
-        else{
-            setName("")
-            setUserName("")
-            setEmail("") 
-            setPhone("")
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        setValue
+    } = useForm({
+        defaultValues:{
+            name:"",
+            userName:"",
+            email:"",
+            phone:"",
+            city:"",
+            street:"",
+            building:""
 
         }
+    })
+
+    React.useEffect(()=>{
+        if(addOrUpdate==="update"){
+            setValue("name",user[index].name)
+            setValue("userName",user[index].userName)
+            setValue("email",user[index].email)
+            setValue("phone",user[index].phone)
+            setValue("city",user[index].address.city)
+            setValue("street",user[index].address.street)
+            setValue("building",user[index].address.building)
+        }
+
 
     },[])
     const createNew = async (data) => {
@@ -52,17 +62,12 @@ const UserForm = ({user, setUser,handleClose,addOrUpdate,index})  => {
             
         }
         catch(err){
-                setError(err.response.data)   
                 alert(err.response.data)         
         }
        
         
     }
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm()
+    
 
     const onSubmit = (data) => {
         console.log(data)
@@ -75,13 +80,13 @@ const UserForm = ({user, setUser,handleClose,addOrUpdate,index})  => {
          <form onSubmit={handleSubmit(onSubmit)}>
             
             <Stack spacing={2}>
-                <TextField required id="name" label="name" variant="standard" defaultValue={name}   {...register("name")} />
-                <TextField required id="userName" label="useName" variant="standard" defaultValue={userName}  {...register("userName")} />
-                <TextField id="email" label="email" variant="standard" defaultValue={email}  {...register("email")} />
-                <TextField id="phone" label="phone" variant="standard" defaultValue={phone}  {...register("phone")} />
-                <TextField id="city" label="city" variant="standard" defaultValue={""}  {...register("city")} />
-                <TextField id="street" label="steet" variant="standard" defaultValue={""}  {...register("street")} />
-                <TextField id="building" label="building" variant="standard" defaultValue={""}  {...register("building")} />
+                <TextField required id="name" label="name" variant="standard"  {...register("name",{required:true})} />
+                <TextField required id="userName" label="useName" variant="standard"   {...register("userName",{required:true})} />
+                <TextField id="email" label="email" variant="standard"   {...register("email")} />
+                <TextField id="phone" label="phone" variant="standard"   {...register("phone")} />
+                <TextField id="city" label="city" variant="standard"   {...register("city")} />
+                <TextField id="street" label="steet" variant="standard"  {...register("street")} />
+                <TextField id="building" label="building" variant="standard"   {...register("building")} />
                 <Button  type="submit" variant="contained" endIcon={<SendIcon />}> Send  </Button>
             </Stack>
 

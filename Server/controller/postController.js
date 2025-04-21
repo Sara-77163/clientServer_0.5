@@ -9,7 +9,7 @@ const getPostById=async(req,res)=>{
     const {_id}=req.params
     const post=await PhtoSchema.findById(_id).lean()
     if(!post)
-        return res.status(400).send("the post not found")
+        return res.status(404).send("the post not found")
     res.json(post)
 }
 const AddPost=async (req,res)=>{
@@ -35,7 +35,7 @@ const deletePost=async (req,res)=>{
     const {_id}=req.params
     const post=await PhtoSchema.findById(_id)
     if(!post)
-        return res.status(400).send("the post not found")
+        return res.status(404).send("the post not found")
     const deletedPost=await post.deleteOne()
     res.json({deletedPost,post})
 }

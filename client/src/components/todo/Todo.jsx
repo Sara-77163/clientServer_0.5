@@ -77,7 +77,7 @@ const Todo = () => {
                                             <FileDownloadDoneIcon  />
                                         </Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText primary={elem.title} secondary={`${elem.tag}  ${elem.completed}`} />
+                                    <ListItemText  primary={elem.title} secondary={`tag:${elem.tag} `} />
                                 </Grid>
                                 <Grid size={12}>
                                     <Stack

@@ -8,17 +8,30 @@ import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 const PostForm = ({post, setPost,handleClose,addOrUpdate,index})  => {
-    const[titleDefault,setTitleDefault]=React.useState("")
-    const [body,setBody]=React.useState("")
     const[error,setError]=React.useState("")
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        control, 
+        setValue 
+    } = useForm({
+        defaultValues: {
+            title:"",
+            body:""
+        },
+    }
+        
+    )
     React.useEffect(()=>{
         if(addOrUpdate==="update"){
-            setTitleDefault(post[index].title)
-            setBody(post[index].body)
+            setValue("title", post[index].title); 
+            setValue("body", post[index].body);   
         }
         else{
-            setTitleDefault("")
-            setBody("")    
+            setValue("title", ""); 
+            setValue("body", "");  
+  
         }
 
     },[])
@@ -52,11 +65,7 @@ const PostForm = ({post, setPost,handleClose,addOrUpdate,index})  => {
        
         
     }
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm()
+   
 
     const onSubmit = (data) => {
         console.log(data)
@@ -69,8 +78,8 @@ const PostForm = ({post, setPost,handleClose,addOrUpdate,index})  => {
          <form onSubmit={handleSubmit(onSubmit)}>
             
             <Stack spacing={2}>
-                <TextField required id="title" label="title" variant="standard" defaultValue={titleDefault}   {...register("title")} />
-                <TextField id="body" label="body" variant="standard" defaultValue={body}  {...register("body")} />
+                <TextField required id="title" label="title" variant="standard"    {...register("title",{required:true})} />
+                <TextField id="body" label="body" variant="standard"   {...register("body")} />
                 <Button  type="submit" variant="contained" endIcon={<SendIcon />}> Send  </Button>
             </Stack>
 

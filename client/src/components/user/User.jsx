@@ -15,6 +15,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import AddUpdateUser from "./AddUpdateUser";
+import Typography from '@mui/material/Typography';
+
 
 
 
@@ -30,8 +32,8 @@ const User = () => {
         catch (err) {
             alert(err.response.data)
         }
-        
-        user.sort((elem1,elem2)=>elem1._id>elem2._id)
+
+        user.sort((elem1, elem2) => elem1._id > elem2._id)
     }
     useEffect(() => {
         fetchData()
@@ -50,40 +52,46 @@ const User = () => {
     }
     return (
         <>
-         <Stack direction="row" spacing={2}>
-         <AddUpdateUser user={user} setUser={setUser} icon={<PersonAddAltIcon />} addOrUpdate={"add"} index={0} />
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', height: '100%' }}>
-                {user.map((elem, index) => {
-                    return (
-                        <ListItem key={elem._id}>
-                            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                                <Grid size={12}>
-                                    <ListItemAvatar>
-                                        <Avatar style={{ backgroundColor: "gray" }}>
-                                            <PersonOutlineIcon />
-                                        </Avatar>
-                                    </ListItemAvatar>
-                                    <ListItemText primary={elem.name} secondary={`${elem.userName} ${elem._id}`} />
-                                </Grid>
-                                <Grid size={12}>
-                                    <Stack
-                                        direction={{ xs: 'column', sm: 'row' }}
-                                        spacing={1}
-                                        sx={{
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                        }}>
+            <Stack direction="row" spacing={2}>
+                <AddUpdateUser user={user} setUser={setUser} icon={<PersonAddAltIcon />} addOrUpdate={"add"} index={0} />
+                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', height: '100%' }}>
+                    {user.map((elem, index) => {
+                        return (
+                            <ListItem key={elem._id}>
+                                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                                    <Grid size={12}>
+                                        <ListItemAvatar>
+                                            <Avatar style={{ backgroundColor: "gray" }}>
+                                                <PersonOutlineIcon />
+                                            </Avatar>
+                                        </ListItemAvatar>
+                                        <ListItemText primary={elem.userName} secondary={
+                                            <>
+                                                <span>name: {elem.name}</span>
+                                                <span> phone:{elem.phone}</span>
+                                                <span>   email:{elem.email}</span>
+                                            </>
+                                        } />
+                                    </Grid>
+                                    <Grid size={12}>
+                                        <Stack
+                                            direction={{ xs: 'column', sm: 'row' }}
+                                            spacing={1}
+                                            sx={{
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                            }}>
 
-                                        <AddUpdateUser user={user} setUser={setUser} icon={<EditIcon />} addOrUpdate={"update"} index={index} />
-                                        <Fab color="secondary" aria-label="delete" onClick={() => { deleteTodo(elem._id) }}><DeleteIcon /> </Fab>
-                                    </Stack>
+                                            <AddUpdateUser user={user} setUser={setUser} icon={<EditIcon />} addOrUpdate={"update"} index={index} />
+                                            <Fab color="secondary" aria-label="delete" onClick={() => { deleteTodo(elem._id) }}><DeleteIcon /> </Fab>
+                                        </Stack>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </ListItem>
-                    )
-                })
-                }
-            </List>
+                            </ListItem>
+                        )
+                    })
+                    }
+                </List>
             </Stack>
         </>
 
